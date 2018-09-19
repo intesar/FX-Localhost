@@ -35,6 +35,7 @@ generators:
     value: null
     methods: null
     denyRoles: null
+    allowRoles: null
     pathPatterns: null
     resourceSamples: null
     queryParams: null
@@ -80,6 +81,7 @@ generators:
     value: null
     methods: "Post, Put, Delete"
     denyRoles: "Writer, Reader"
+    allowRoles: null
     pathPatterns: "/api/v1/orgs/**, /api/v1/accounts/**"
     resourceSamples: null
     queryParams: null
@@ -88,6 +90,7 @@ generators:
     value: null
     methods: "Post, Put, Delete"
     denyRoles: "Reader"
+    allowRoles: null
     pathPatterns: "/api/v1/projects/**, /api/v1/regions/**"
     resourceSamples: null
     queryParams: null
@@ -96,6 +99,7 @@ generators:
     value: null
     methods: "Post, Delete"
     denyRoles: "Collaborator"
+    allowRoles: null
     pathPatterns: "/api/v1/projects/**"
     resourceSamples: null
     queryParams: null
@@ -104,6 +108,7 @@ generators:
     value: null
     methods: "Get, Post, Put, Delete"
     denyRoles: "Other"
+    allowRoles: null
     pathPatterns: "/api/v1/**"
     resourceSamples: null
     queryParams: null
