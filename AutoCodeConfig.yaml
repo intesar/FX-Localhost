@@ -5,6 +5,7 @@ generators:
 - type: "no_params"
   assertions:
   - "@StatusCode == 200"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -12,6 +13,7 @@ generators:
 - type: "anonymous_invalid"
   assertions:
   - "@StatusCode != 200"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -19,6 +21,7 @@ generators:
 - type: "auth_invalid"
   assertions:
   - "@StatusCode != 200"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -27,6 +30,7 @@ generators:
   assertions:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -46,6 +50,7 @@ generators:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
   - "@StatusCode != 500"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -54,6 +59,7 @@ generators:
   assertions:
   - "@ResponseTime < 7000"
   - "@StatusCode != 404"
+  tags: null
   severity: null
   database:
     name: "MySQL"
@@ -66,6 +72,7 @@ generators:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
   - "@StatusCode != 500"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -74,6 +81,7 @@ generators:
   assertions:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -84,6 +92,7 @@ generators:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
   - "@StatusCode != 500"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -94,6 +103,7 @@ generators:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
   - "@StatusCode != 500"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -104,6 +114,7 @@ generators:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
   - "@StatusCode != 500"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -112,6 +123,7 @@ generators:
   assertions:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
+  tags: null
   severity: null
   database: null
   inactive: false
@@ -122,6 +134,7 @@ generators:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
   - "@StatusCode != 500"
+  tags: null
   severity: null
   database: null
   inactive: false
