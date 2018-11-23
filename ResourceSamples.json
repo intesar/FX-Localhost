@@ -124,10 +124,4 @@
 }, {
   "resource" : "Users-Create",
   "sample" : "{\n  'accountNonExpired' : null,\n  'accountNonLocked' : null,\n  'company' : null,\n  'createdBy' : null,\n  'createdDate' : null,\n  'credentialsNonExpired' : null,\n  'email' : null,\n  'enabled' : null,\n  'id' : null,\n  'inactive' : null,\n  'jobTitle' : null,\n  'location' : null,\n  'modifiedBy' : null,\n  'modifiedDate' : null,\n  'name' : null,\n  'password' : null,\n  'privileges' : [ ],\n  'username' : null,\n  'version' : null\n}"
-}, {
-  "resource" : "Vault-Create",
-  "sample" : "{\n  'createdBy' : null,\n  'createdDate' : null,\n  'description' : null,\n  'id' : null,\n  'inactive' : null,\n  'key' : null,\n  'modifiedBy' : null,\n  'modifiedDate' : null,\n  'org' : {\n    'createdBy' : null,\n    'createdDate' : null,\n    'id' : null,\n    'inactive' : null,\n    'modifiedBy' : null,\n    'modifiedDate' : null,\n    'name' : null,\n    'version' : null\n  },\n  'val' : null,\n  'version' : null\n}"
-}, {
-  "resource" : "Vault-Update",
-  "sample" : "{\n  'createdBy' : null,\n  'createdDate' : null,\n  'description' : null,\n  'id' : null,\n  'inactive' : null,\n  'key' : null,\n  'modifiedBy' : null,\n  'modifiedDate' : null,\n  'org' : {\n    'createdBy' : null,\n    'createdDate' : null,\n    'id' : null,\n    'inactive' : null,\n    'modifiedBy' : null,\n    'modifiedDate' : null,\n    'name' : null,\n    'version' : null\n  },\n  'val' : null,\n  'version' : null\n}"
 } ]
