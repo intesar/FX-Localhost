@@ -2,11 +2,103 @@
 genPolicy: "Create"
 openAPISpec: "http://localhost:8080/v2/api-docs"
 generators:
+- type: "sql_injection_timebound"
+  assertions:
+  - "@ResponseTime < 7000"
+  - "@StatusCode != 404"
+  tags:
+  - "OWASP A1"
+  - "[PCI DSS 3.0] 6.5.1"
+  - "OWASP - OTG-INPVAL-005"
+  - "FX Top 10 - API Vulnerability"
+  severity: null
+  database:
+    name: "MySQL"
+    version: "5.7"
+  inactive: true
+  matches:
+  - name: null
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: null
+    resourceSamples: "User-Create"
+    queryParams: null
+    bodyProperties: "id,name"
+  authors: null
+  abacResources: null
+- type: "invalid_datatype"
+  assertions:
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  tags:
+  - "OWASP - OTG-BUSLOGIC-001"
+  severity: null
+  database: null
+  inactive: true
+  matches: []
+  authors: null
+  abacResources: null
+- type: "special_chars "
+  assertions:
+  - "@StatusCode != 200"
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  - "@StatusCode != 500"
+  tags:
+  - "OWASP - OTG-BUSLOGIC-001"
+  severity: null
+  database: null
+  inactive: true
+  matches: []
+  authors: null
+  abacResources: null
+- type: "null_value"
+  assertions:
+  - "@StatusCode != 200"
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  - "@StatusCode != 500"
+  tags:
+  - "OWASP - OTG-BUSLOGIC-001"
+  severity: null
+  database: null
+  inactive: true
+  matches: []
+  authors: null
+  abacResources: null
+- type: "empty_value"
+  assertions:
+  - "@StatusCode != 200"
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  - "@StatusCode != 500"
+  tags: null
+  severity: null
+  database: null
+  inactive: true
+  matches: []
+  authors: null
+  abacResources: null
+- type: "negative_number"
+  assertions:
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  tags:
+  - "OWASP - OTG-BUSLOGIC-001"
+  severity: null
+  database: null
+  inactive: true
+  matches: []
+  authors: null
+  abacResources: null
 - type: "anonymous_invalid"
   assertions:
   - "@StatusCode == 401 OR @StatusCode == 403"
   tags:
   - "OWASP - OTG-AUTHN-002"
+  - "FX Top 10 - API Vulnerability"
   severity: null
   database: null
   inactive: false
@@ -21,6 +113,7 @@ generators:
     queryParams: null
     bodyProperties: null
   authors: null
+  abacResources: null
 - type: "no_params"
   assertions:
   - "@StatusCode == 200"
@@ -31,11 +124,13 @@ generators:
   inactive: true
   matches: []
   authors: null
+  abacResources: null
 - type: "DDOS"
   assertions:
   - "@StatusCode != 200"
   tags:
   - "[PCI DSS 3.0] 6.5.2"
+  - "FX Top 10 - API Vulnerability"
   severity: null
   database: null
   inactive: false
@@ -54,6 +149,7 @@ generators:
     queryParams: null
     bodyProperties: null
   authors: null
+  abacResources: null
 - type: "auth_invalid"
   assertions:
   - "@StatusCode != 200"
@@ -62,9 +158,10 @@ generators:
   - "OWASP A5"
   - "OWASP A6"
   - "OWASP A7"
-  - "[PIC DSS 3.0] 6.5.8"
-  - "[PIC DSS 3.0] 6.5.10"
+  - "[PCI DSS 3.0] 6.5.8"
+  - "[PCI DSS 3.0] 6.5.10"
   - "OTG-AUTHN-004"
+  - "FX Top 10 - API Vulnerability"
   severity: null
   database: null
   inactive: false
@@ -79,123 +176,7 @@ generators:
     queryParams: null
     bodyProperties: null
   authors: null
-- type: "XSS_Injection"
-  assertions:
-  - "@StatusCode != 200"
-  - "@StatusCode != 401"
-  - "@StatusCode != 404"
-  - "@StatusCode != 500"
-  tags:
-  - "OWASP A3"
-  - "[PIC DSS 3.0] 6.5.7"
-  - "OWASP - OTG-INPVAL-001"
-  - "OWASP - OTG-INPVAL-002"
-  severity: null
-  database: null
-  inactive: true
-  matches: []
-  authors: null
-- type: "sql_injection_timebound"
-  assertions:
-  - "@ResponseTime < 7000"
-  - "@StatusCode != 404"
-  tags:
-  - "OWASP A1"
-  - "[PCI DSS 3.0] 6.5.1"
-  - "OWASP - OTG-INPVAL-005"
-  severity: null
-  database:
-    name: "MySQL"
-    version: "5.7"
-  inactive: true
-  matches: []
-  authors: null
-- type: "log_Forging"
-  assertions:
-  - "@StatusCode != 200"
-  - "@StatusCode != 401"
-  - "@StatusCode != 404"
-  - "@StatusCode != 500"
-  tags:
-  - "OWASP - Log Injection"
-  severity: null
-  database: null
-  inactive: true
-  matches: []
-  authors: null
-- type: "invalid_datatype"
-  assertions:
-  - "@StatusCode != 401"
-  - "@StatusCode != 404"
-  tags:
-  - "OWASP - OTG-BUSLOGIC-001"
-  severity: null
-  database: null
-  inactive: true
-  matches: []
-  authors: null
-- type: "special_chars "
-  assertions:
-  - "@StatusCode != 200"
-  - "@StatusCode != 401"
-  - "@StatusCode != 404"
-  - "@StatusCode != 500"
-  tags:
-  - "OWASP - OTG-BUSLOGIC-001"
-  severity: null
-  database: null
-  inactive: true
-  matches: []
-  authors: null
-- type: "null_value"
-  assertions:
-  - "@StatusCode != 200"
-  - "@StatusCode != 401"
-  - "@StatusCode != 404"
-  - "@StatusCode != 500"
-  tags:
-  - "OWASP - OTG-BUSLOGIC-001"
-  severity: null
-  database: null
-  inactive: true
-  matches: []
-  authors: null
-- type: "empty_value"
-  assertions:
-  - "@StatusCode != 200"
-  - "@StatusCode != 401"
-  - "@StatusCode != 404"
-  - "@StatusCode != 500"
-  tags: null
-  severity: null
-  database: null
-  inactive: true
-  matches: []
-  authors: null
-- type: "negative_number"
-  assertions:
-  - "@StatusCode != 401"
-  - "@StatusCode != 404"
-  tags:
-  - "OWASP - OTG-BUSLOGIC-001"
-  severity: null
-  database: null
-  inactive: true
-  matches: []
-  authors: null
-- type: "create"
-  assertions:
-  - "@StatusCode != 200"
-  - "@StatusCode != 401"
-  - "@StatusCode != 404"
-  - "@StatusCode != 500"
-  tags:
-  - " OWASP - OTG-CONFIG-006"
-  severity: null
-  database: null
-  inactive: true
-  matches: []
-  authors: null
+  abacResources: null
 - type: "auth_invalid_sql"
   assertions:
   - "@StatusCode == 401 OR @StatusCode == 403"
@@ -203,6 +184,7 @@ generators:
   - "OWASP A1"
   - "[PCI DSS 3.0] 6.5.1"
   - "OTG-AUTHN-004"
+  - "FX Top 10 - API Vulnerability"
   severity: null
   database: null
   inactive: true
@@ -217,6 +199,7 @@ generators:
     queryParams: null
     bodyProperties: null
   authors: null
+  abacResources: null
 - type: "auth_invalid_empty"
   assertions:
   - "@StatusCode == 401 OR @StatusCode == 403"
@@ -225,9 +208,10 @@ generators:
   - "OWASP A5"
   - "OWASP A6"
   - "OWASP A7"
-  - "[PIC DSS 3.0] 6.5.8"
-  - "[PIC DSS 3.0] 6.5.10"
+  - "[PCI DSS 3.0] 6.5.8"
+  - "[PCI DSS 3.0] 6.5.10"
   - "OTG-AUTHN-004"
+  - "FX Top 10 - API Vulnerability"
   severity: null
   database: null
   inactive: false
@@ -242,6 +226,7 @@ generators:
     queryParams: null
     bodyProperties: null
   authors: null
+  abacResources: null
 - type: "sla"
   assertions:
   - "@StatusCode == 200 AND @ResponseTime < 500"
@@ -251,23 +236,210 @@ generators:
   inactive: false
   matches: []
   authors: null
+  abacResources: null
 - type: "rbac"
   assertions:
   - "Disallowed:@StatusCode == 401 OR @StatusCode == 403"
   - "Allowed:@StatusCode != 401 AND @StatusCode != 403"
   tags:
   - "OWASP - OTG-IDENT-001 "
+  - "FX Top 10 - API Vulnerability"
   severity: null
   database: null
   inactive: false
   matches:
   - name: "ROLE_ADMIN,ROLE_PM,ROLE_USER"
+    value: "None"
+    methods: "POST"
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: "POST:/api/v1/skills"
+    resourceSamples: "\nPOST:/api/v1/bot-clusters/batch:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      POST:/api/v1/data-records:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/issues/job-id/{id}:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      PUT:/api/v1/data-records:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nGET:/api/v1/dashboard/count-auto-suggestions:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      POST:/api/v1/bot-clusters:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nPOST:/api/v1/users/org-add:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      PUT:/api/v1/envs:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\nPOST:/api/v1/users/enterprise-sign-up:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      GET:/api/v1/dashboard/count-jobs:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nGET:/api/v1/dashboard/count-tests-between:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      POST:/api/v1/projects/{projectId}/envs:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      POST:/api/v1/accounts/batch:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nGET:/api/v1/skills/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/runs/{id}:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\nGET:/api/v1/accounts/{id}:Allowed[ROLE_PM,ROLE_ADMIN]\n\
+      POST:/api/v1/projects/{id}/project-sync:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      POST:/api/v1/projects:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\nPUT:/api/v1/data-sets:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      GET:/api/v1/skills:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nPOST:/api/v1/orgs/{orgId}/users/{userId}/reset-password:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/bot-clusters/entitled:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\nGET:/api/v1/dashboard/count-envs:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/bot-clusters/{id}/ping:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\nGET:/api/v1/dashboard/count-suites:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      POST:/api/v1/users/team-sign-up:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\nGET:/api/v1/alerts:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      DELETE:/api/v1/test-suites/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nDELETE:/api/v1/projects/{projectId}/env/{envId}:Allowed[ROLE_ADMIN,ROLE_PM]\n\
+      PUT:/api/v1/users:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nGET:/api/v1/dashboard/count-bytes:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      GET:/api/v1/projects/{id}/files:Allowed[ROLE_ADMIN,ROLE_PM]\nGET:/api/v1/dashboard/count-runs:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      DELETE:/api/v1/jobs/{id}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nGET:/api/v1/orgs/search:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/projects/{id}/auto-suggestions/category-counts/{status}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/projects/search:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\nPOST:/api/v1/runs/job/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/projects/{id}/files-all:Allowed[ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/bot-clusters:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      GET:/api/v1/dashboard/count-ebots:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nGET:/api/v1/projects/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      DELETE:/api/v1/data-records/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/notifications/{id}:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      GET:/api/v1/jobs/project-id/{id}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nPOST:/api/v1/orgs/{orgId}/users/add-member:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      GET:/api/v1/issues/project-id/{id}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nPOST:/api/v1/users/personal-sign-up:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      GET:/api/v1/bot-clusters/superbotnetwork:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      GET:/api/v1/system-settings:Allowed[ROLE_ADMIN]\nGET:/api/v1/projects/{projectId}/files/{id}:Allowed[ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/test-suites/{id}/test-suite/search:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/runs/{id}/test-suite-response/{name}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/orgs/{orgId}/org-user/{orgUserId}:Allowed[ROLE_ADMIN]\nGET:/api/v1/test-suites/{id}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      POST:/api/v1/projects/{id}/project-imports:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/dashboard/count-time:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nGET:/api/v1/orgs/find-by-name/{name}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      PUT:/api/v1/orgs/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/dashboard/count-projects:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      DELETE:/api/v1/notifications/{id}:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nGET:/api/v1/orgs:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      POST:/api/v1/skills:Allowed[ROLE_USER,ROLE_PM]\nDELETE:/api/v1/accounts/{id}:Allowed[ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/jobs:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nGET:/api/v1/runs/stoprun/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/bot-clusters/search:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/issue-trackers:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      GET:/api/v1/orgs/login-status:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\nPOST:/api/v1/projects/{projectId}/new/autocodeconfig:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      POST:/api/v1/projects/{projectId}/autocodeconfig:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      DELETE:/api/v1/runs/job/{jobId}/run/{runId}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      GET:/api/v1/projects/{projectId}/env:Allowed[ROLE_ADMIN,ROLE_PM]\nGET:/api/v1/runs/job/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/accounts/account-type/{accountType}:Allowed[ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/orgs/by-user:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\nDELETE:/api/v1/issue-trackers/issue-tracker-bot/{id}:Allowed[ROLE_PM,ROLE_ADMIN]\n\
+      POST:/api/v1/test-suites/{projectId}/ui:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/projects/find-by-name/{name}:Allowed[ROLE_ADMIN,ROLE_PM]\nPOST:/api/v1/envs:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      POST:/api/v1/runs/testsuite:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/projects/{id}/search-auto-suggestions/search/{status}:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/jobs/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/dashboard/count-bytes-between:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      GET:/api/v1/dashboard/count-bugs:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nGET:/api/v1/projects/{id}/auto-suggestions/skip/{suiteName}/{tcNumber}:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      GET:/api/v1/projects:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nGET:/api/v1/envs/project-id/{id}:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      POST:/api/v1/data-records/batch:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\nGET:/api/v1/runs/{jobId}/testSuite/test-suite-responses/{name}:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      GET:/api/v1/issue-trackers/skill-type/{type}:Allowed[ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/dashboard/count-runs-between:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/runs/{id}/test-suite-summary/search:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      PUT:/api/v1/projects/{id}:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\nPUT:/api/v1/issue-trackers/{id}:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/test-suites/project-id/{id}/coverage:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      PUT:/api/v1/notifications/{id}:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\nGET:/api/v1/projects/{id}/auto-suggestions/{status}:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      GET:/api/v1/issue-trackers/{id}:Allowed[ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/events/orgevents:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/projects/{projectId}/autocodeconfig:Allowed[ROLE_ADMIN,ROLE_PM]\n\
+      DELETE:/api/v1/data-sets/{id}:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\nPUT:/api/v1/projects/{projectId}/env/{envId}:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      PUT:/api/v1/jobs:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nPUT:/api/v1/skills:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      GET:/api/v1/data-sets:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nGET:/api/v1/projects/{id}/auto-suggestions/activate/{suiteName}/{tcNumber}:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      GET:/api/v1/bot-clusters/{id}:Allowed[ROLE_ADMIN,ROLE_PM]\nPUT:/api/v1/test-suites:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      GET:/api/v1/events/register:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\nGET:/api/v1/runs/{id}/test-suite-responses:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      GET:/api/v1/test-suites/project-id/{id}:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      POST:/api/v1/jobs:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\nGET:/api/v1/dashboard/count-channels:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      POST:/api/v1/jobs/batch:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nPUT:/api/v1/test-suites/deletedtestsuites:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      POST:/api/v1/data-sets/batch:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\nGET:/api/v1/data-records:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      GET:/api/v1/test-suites/search/{keyword}:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      GET:/api/v1/accounts/search:Allowed[ROLE_PM,ROLE_ADMIN]\nPOST:/api/v1/runs/job/{jobId}/rerun/{runId}:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      GET:/api/v1/dashboard/issuetracker/{id}/issuetracker-savings:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/dashboard/count-tests:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nGET:/api/v1/skills/type/{type}:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      POST:/api/v1/data-sets:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nGET:/api/v1/notifications:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      DELETE:/api/v1/projects/{id}:Allowed[ROLE_ADMIN,ROLE_PM]\nPOST:/api/v1/test-suites:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/dashboard/projects/{id}/savings:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      POST:/api/v1/accounts:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\nDELETE:/api/v1/bot-clusters/{id}:Allowed[ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/projects/{id}/project-checksums:Allowed[ROLE_ADMIN,ROLE_PM]\nDELETE:/api/v1/data-records/{dataset_id}/delete-all:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      POST:/api/v1/notifications:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\nPOST:/api/v1/orgs:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      GET:/api/v1/envs/{id}:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\nGET:/api/v1/dashboard/run/{id}/run-savings:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/projects/{id}/project-checksums-all:Allowed[ROLE_PM,ROLE_ADMIN]\n\
+      POST:/api/v1/notifications/batch:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\nGET:/api/v1/runs/job/{id}/runNo/{runNo}:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/dashboard/count-ibots:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\nPUT:/api/v1/bot-clusters/{id}/terminal:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      GET:/api/v1/issues/env-id/{id}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nGET:/api/v1/projects/{id}/count-archived-auto-suggestions/{status}:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      DELETE:/api/v1/orgs/{id}:Allowed[ROLE_ADMIN]\nPUT:/api/v1/bot-clusters/{id}:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      GET:/api/v1/projects/name/{name}:Allowed[ROLE_ADMIN,ROLE_PM]\nGET:/api/v1/runs/{id}/test-suite-summary:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      DELETE:/api/v1/runs/{id}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nGET:/api/v1/alerts/ref/{id}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      GET:/api/v1/dashboard/bots/{id}/savings:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      GET:/api/v1/alerts/{id}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\nDELETE:/api/v1/envs/{id}:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      GET:/api/v1/dashboard/count-bugs-between:Allowed[ROLE_USER,ROLE_ADMIN,ROLE_PM]\n\
+      GET:/api/v1/orgs/{id}/users:Allowed[ROLE_ADMIN]\nPOST:/api/v1/issue-trackers/issue-tracker-bot:Allowed[ROLE_USER,ROLE_PM,ROLE_ADMIN]\n\
+      GET:/api/v1/test-suites:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\nPOST:/api/v1/projects/{projectId}/env:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      POST:/api/v1/envs/batch:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\nPOST:/api/v1/users/org-remove:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      GET:/api/v1/accounts:Allowed[ROLE_PM]\nPUT:/api/v1/system-settings:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\n\
+      GET:/api/v1/dashboard/count-time-between:Allowed[ROLE_PM,ROLE_ADMIN,ROLE_USER]\n\
+      PUT:/api/v1/orgs/{orgId}/users/{userId}:Allowed[ROLE_PM,ROLE_USER,ROLE_ADMIN]\n\
+      GET:/api/v1/users/status:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\nDELETE:/api/v1/skills/{id}:Allowed[ROLE_ADMIN]\n\
+      POST:/api/v1/test-suites/batch:Allowed[ROLE_ADMIN,ROLE_USER,ROLE_PM]\nPUT:/api/v1/accounts/{id}:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\n\
+      GET:/api/v1/users:Allowed[ROLE_ADMIN]\nGET:/api/v1/orgs/{id}:Allowed[ROLE_ADMIN]\n\
+      PUT:/api/v1/projects:Allowed[ROLE_ADMIN,ROLE_PM,ROLE_USER]\nGET:/api/v1/system-settings/{id}:Allowed[ROLE_ADMIN]\n"
+    queryParams: null
+    bodyProperties: null
+  authors: null
+  abacResources: null
+- type: "abac"
+  assertions:
+  - "Create:@StatusCode == 200 OR @StatusCode == 201"
+  - "Disallowed:@StatusCode == 401 OR @StatusCode == 403"
+  tags:
+  - "FX Top 10 - API Vulnerability"
+  severity: "Major"
+  database: null
+  inactive: false
+  matches:
+  - name: null
+    value: null
+    methods: null
+    denyRoles: "ORG_B_ADMIN,ORG_B_USER"
+    allowRoles: "ORG_A_USER"
+    pathPatterns: null
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+  authors: ""
+  abacResources: null
+- type: "abacpositive"
+  assertions:
+  - "Create:@StatusCode == 200 OR @StatusCode == 201"
+  - "Allowed:@StatusCode == 200 OR @StatusCode == 201"
+  tags:
+  - "FX Top 10 - API Vulnerability"
+  severity: "Major"
+  database: null
+  inactive: true
+  matches:
+  - name: null
+    value: null
+    methods: null
+    denyRoles: "ORG_A_ADMIN,ORG_A_USER2"
+    allowRoles: "ORG_A_USER1"
+    pathPatterns: null
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+  authors: ""
+  abacResources: null
+- type: "no_sql_injection_timebound"
+  assertions:
+  - "@ResponseTime < 7000 OR @ResponseTime > 10000"
+  - "@StatusCode != 404"
+  tags:
+  - "OWASP A1"
+  - "[PCI DSS 3.0] 6.5.1"
+  - "OWASP - OTG-INPVAL-005"
+  - "FX Top 10 - API Vulnerability"
+  severity: "Major"
+  database:
+    name: "MongoDB"
+    version: "4.0"
+  inactive: true
+  matches:
+  - name: null
     value: null
     methods: null
     denyRoles: null
     allowRoles: null
     pathPatterns: null
-    resourceSamples: "GET:/api/v1/accounts:Allowed[ROLE_ADMIN]\n"
+    resourceSamples: "User-Create"
+    queryParams: null
+    bodyProperties: "id,name"
+  authors: ""
+  abacResources: null
+- type: "customize"
+  assertions: []
+  tags: null
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: null
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: null
+    resourceSamples: "Get:/api/v1/alerts[Accept=application/json,Content-Type=application/json]\n\
+      Post:/api/v1/accounts[Accept: application/json,Content-Type: application/json]"
     queryParams: null
     bodyProperties: null
-  authors: null
+  authors: ""
+  abacResources: null
